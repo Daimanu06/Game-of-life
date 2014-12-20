@@ -45,7 +45,7 @@ namespace gameoflife {
 		//Screen dimensions
 		Size::size_t scrw, scrh;
 		getmaxyx(stdscr, scrh, scrw);
-		//TODO: warning with getmaxy → int
+		//TODO: warning with getmaxyx
 		screen_size = Size{scrw, scrh-2};
 
 		start_color();
@@ -57,7 +57,7 @@ namespace gameoflife {
 			endwin();
 			std::ostringstream oss;
 			oss << "The window is too small.\n";
-			oss << "It must be at least ";
+			oss << "Please resize the window so that it is at least ";
 			oss << WIN_WIDTH << "\303\227" << WIN_HEIGHT;
 			oss << " (currently " << scrw << "\303\227" << scrh << ")",
 					throw(oss.str());
@@ -145,6 +145,6 @@ namespace gameoflife {
 	}
 	Size CursesRenderer::availablespace() {
 		return pimpl->availablespace();
-	}
-	//CursesRenderer definition
+	} //CursesRenderer definition
+
 } //!namespace
