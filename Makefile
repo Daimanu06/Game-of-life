@@ -2,7 +2,7 @@ EXEC=gameoflife
 CC=g++
 CFLAGS=-std=c++11 -Wall -Wextra -O3
 LDFLAGS=-std=c++11
-LIBS=-lncursesw
+LIBS=-lncursesw -lpthread
 OBJECTS = $(SOURCES:.cpp=.o)
 SOURCES = $(wildcard *.cpp)
 
