@@ -6,8 +6,8 @@
 int main(int, char **) {
 	namespace gol = gameoflife;
 	try{
-		//gol::StdoutView view;
-		gol::CursesRenderer view;
+		gol::TerminalRenderer view;
+		//gol::CursesRenderer view;
 		gol::GameOfLife game(view);
 		game.newgrid();
 		game.run();

@@ -17,7 +17,7 @@ namespace gameoflife {
 	class Grid {
 		public:
 			/**
-			 * Constructs a new grid with all cells set to dead.
+			 * Constructs a new grid with all cells initially dead.
 			 */
 			Grid(const Size&);
 			Grid(const Grid&);
@@ -25,14 +25,22 @@ namespace gameoflife {
 			Grid& operator =(const Grid&);
 
 		public:
+			///Return the width of the grid.
 			Size::size_t width()  const;
+			///Return the height of the grid.
 			Size::size_t height() const;
+			///Return the size of the grid.
 			Size         size()   const;
 
 			/**
 			 * Returns the cell at the given row and col.
+			 * Const version.
 			 */
 			const Cell& operator()(Size::size_t row, Size::size_t col) const;
+			/**
+			 * Returns the cell at the given row and col.
+			 * Non const version.
+			 */
 				  Cell& operator()(Size::size_t row, Size::size_t col);
 
 			/**

@@ -4,7 +4,7 @@
 namespace gameoflife {
 
 	/**
-	 * Represents a cell that maybe alive or dead.
+	 * Describes a cell that maybe alive or dead.
 	 */
 	class Cell {
 		private:

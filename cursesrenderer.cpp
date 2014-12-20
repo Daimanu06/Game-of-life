@@ -1,4 +1,4 @@
-#include "cursesview.h"
+#include "cursesrenderer.h"
 #include "grid.h"
 #include "cell.h"
 #include <ncursesw/curses.h>
@@ -30,9 +30,9 @@ namespace gameoflife {
 			void drawTitle(WINDOW *);
 			void drawControl(WINDOW *);
 			void drawPlay(WINDOW *, const Grid&);
-	}; //!TUIView::Impl declaration
+	}; //CursesRenderer::Impl declaration
 
-	//TUIView::Impl definition
+	//CursesRenderer::Impl definition
 	CursesRenderer::Impl::Impl() {
 		setlocale(LC_ALL, "");
 		initscr();
@@ -42,7 +42,7 @@ namespace gameoflife {
 			throw("The terminal must be able to show colors.");
 		}
 
-		/** Screen dimensions **/
+		//Screen dimensions
 		Size::size_t scrw, scrh;
 		getmaxyx(stdscr, scrh, scrw);
 		//TODO: warning with getmaxy → int
@@ -63,19 +63,19 @@ namespace gameoflife {
 					throw(oss.str());
 		}
 
-		/** Windows init **/
+		//Windows init
 		//h w y x
 		title_win = newwin(     1, scrw,      0, 0);
 		play_win  = newwin(scrh-2, scrw,      1, 0);
 		ctrl_win  = newwin(     1, scrw, scrh-1, 0);
 		input_win = ctrl_win;
 
-		/** Other attributes **/
+		//Other attributes
 		noecho();
 		curs_set(0); //hide cursor
 		keypad(input_win, true); //bind keyboard to a window
 
-		//draw constant windows
+		//Draw constant windows, since they won't change in the future
 		drawTitle(title_win);
 		drawControl(ctrl_win);
 	}
@@ -131,10 +131,9 @@ namespace gameoflife {
 		wattroff(win, A_BOLD);
 		wattroff(win, COLOR_PAIR(2));
 	}
-	//!TUIView::Impl definition
+	//CursesRenderer::Impl definition
 
-
-	//TUIView definition
+	//CursesRenderer definition
 	CursesRenderer::CursesRenderer() : Renderer(), pimpl(new Impl) {}
 	CursesRenderer::~CursesRenderer() {}
 
@@ -147,5 +146,5 @@ namespace gameoflife {
 	Size CursesRenderer::availablespace() {
 		return pimpl->availablespace();
 	}
-	//!TUIView definition
+	//CursesRenderer definition
 } //!namespace

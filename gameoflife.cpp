@@ -14,6 +14,7 @@ namespace gameoflife {
 	GameOfLife::~GameOfLife() {}
 
 	void GameOfLife::newgrid(std::uint8_t life_proba) {
+		m_run = false;
 		m_current_gen = 0;
 		if(life_proba > 100) {
 			life_proba = 100;
@@ -32,7 +33,7 @@ namespace gameoflife {
 	}
 
 	/**
-	 * Blocking function that will be released when the user requests a stop or when the provided generation count is reached.
+	 * Blocking function released when the user requests a stop or when the provided generation count is reached.
 	 * Lauches two threads:
 	 * #1 updates and draws continuously the grid.
 	 * #2 awaits for user's input.

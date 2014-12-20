@@ -12,7 +12,7 @@ namespace gameoflife {
 
 	/**
 	 * Controller class.
-	 * Manages the data (the grid) and the view.
+	 * Manages the data (the grid), the view and the game rules.
 	 */
 	class GameOfLife{
 		public:
@@ -27,7 +27,7 @@ namespace gameoflife {
 
 		public:
 			/**
-			 * Construct an empty grid (aka with no living cell).
+			 * Construct an empty grid (only populated with dead cells).
 			 */
 			GameOfLife(Renderer &);
 			~GameOfLife();
@@ -35,13 +35,13 @@ namespace gameoflife {
 		public:
 			/**
 			 * Create a new grid, with random probability for each cell to live.
-			 * If the probability is greater than 100, it will be rounded to 100;
+			 * If the probability is greater than 100, it will be rounded to 100.
 			 * @param life_proba probability of a cell to live in percent (0 → no cells are alive, 100 → all cells are alive).
 			 */
 			void newgrid(std::uint8_t life_proba = 50);
 			/**
-			 * Update and render the game "count" times.
-			 * By default the game will run until it reaches its 2³² (≈ 4⋅10⁹) generation.
+			 * Update and render the game "max" times.
+			 * By default the game will run until it reaches the 2³²th (≈ 4⋅10⁹) generation.
 			 */
 			void run(const Generation max = std::numeric_limits<Generation>::max());
 			/**
@@ -60,7 +60,7 @@ namespace gameoflife {
 			 */
 			void nextgeneration();
 			/**
-			 * Draw the grid on the the view provided.
+			 * Draw the grid in the the view provided.
 			 */
 			void draw();
 	};

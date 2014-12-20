@@ -18,6 +18,9 @@ namespace gameoflife {
 			~CursesRenderer();
 
 		public:
+			/**
+			 * Draw the world winthin the given grid.
+			 */
 			virtual void draw(const Grid&) override;
 			virtual char waitinput() override;
 			virtual Size availablespace() override;
