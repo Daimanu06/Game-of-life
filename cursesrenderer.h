@@ -21,7 +21,7 @@ namespace gameoflife {
 			/**
 			 * Draw the world winthin the given grid.
 			 */
-			virtual void draw(const Grid&) override;
+			virtual void draw(const Grid&, const Generation&) override;
 			virtual char waitinput() override;
 			virtual Size availablespace() override;
 

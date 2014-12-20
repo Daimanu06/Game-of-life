@@ -14,7 +14,7 @@ namespace gameoflife {
 	 * @warning To enter a command, you need to type the letter and press <Enter> to validate.
 	 */
 	struct TerminalRenderer : public Renderer {
-			virtual void draw(const Grid&) override;
+			virtual void draw(const Grid&, const Generation&) override;
 			virtual char waitinput() override;
 			virtual Size availablespace() override;
 	};

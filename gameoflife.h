@@ -3,7 +3,7 @@
 
 #include "size.h"
 #include "grid.h"
-#include <cstdint>
+#include "generation.h"
 #include <limits>
 
 namespace gameoflife {
@@ -15,9 +15,6 @@ namespace gameoflife {
 	 * Manages the data (the grid), the view and the game rules.
 	 */
 	class GameOfLife{
-		public:
-			typedef std::uint32_t Generation;
-
 		private:
 			Renderer &m_view;
 			Grid  m_grid;

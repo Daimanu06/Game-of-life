@@ -1,6 +1,7 @@
 #include "cursesrenderer.h"
 #include "grid.h"
 #include "cell.h"
+#include "generation.h"
 #include <ncursesw/curses.h>
 #include <sstream>
 
@@ -11,10 +12,10 @@ namespace gameoflife {
 			WINDOW *title_win;
 			///Displays the world and it's cells.
 			WINDOW *play_win;
-			///Displays some informations like the current generation number.
-			WINDOW *info_win;
 			///Displays keyboard shortcuts used to interact with the game.
 			WINDOW *ctrl_win;
+			///Displays some informations like the current generation number.
+			WINDOW *info_win;
 			///Window where inputs will be redirected.
 			WINDOW *input_win;
 			Size screen_size;
@@ -23,13 +24,14 @@ namespace gameoflife {
 			Impl();
 			~Impl();
 
-			void draw(const Grid&);
+			void draw(const Grid&, const Generation&);
 			char waitinput();
 			Size availablespace();
 
 			void drawTitle(WINDOW *);
-			void drawControl(WINDOW *);
 			void drawPlay(WINDOW *, const Grid&);
+			void drawControls(WINDOW *);
+			void drawInfos(WINDOW *, const Generation&);
 	}; //CursesRenderer::Impl declaration
 
 	//CursesRenderer::Impl definition
@@ -65,9 +67,10 @@ namespace gameoflife {
 
 		//Windows init
 		//h w y x
-		title_win = newwin(     1, scrw,      0, 0);
-		play_win  = newwin(scrh-2, scrw,      1, 0);
-		ctrl_win  = newwin(     1, scrw, scrh-1, 0);
+		title_win = newwin(     1,    scrw,      0,  0);
+		play_win  = newwin(scrh-2,    scrw,      1,  0);
+		ctrl_win  = newwin(     1,      64, scrh-1,  0);
+		info_win  = newwin(     1, scrw-64, scrh-1, 64);
 		input_win = ctrl_win;
 
 		//Other attributes
@@ -77,13 +80,14 @@ namespace gameoflife {
 
 		//Draw constant windows, since they won't change in the future
 		drawTitle(title_win);
-		drawControl(ctrl_win);
+		drawControls(ctrl_win);
 	}
 
 	CursesRenderer::Impl::~Impl() {
 		delwin(title_win);
 		delwin(play_win);
 		delwin(ctrl_win);
+		delwin(info_win);
 		endwin();
 	}
 
@@ -95,7 +99,8 @@ namespace gameoflife {
 		return screen_size;
 	}
 
-	void CursesRenderer::Impl::draw(const Grid &grid) {
+	void CursesRenderer::Impl::draw(const Grid &grid, const Generation &gen) {
+		drawInfos(info_win, gen);
 		drawPlay(play_win, grid);
 	}
 
@@ -110,13 +115,20 @@ namespace gameoflife {
 		wattroff(win, COLOR_PAIR(1));
 	}
 
-	void CursesRenderer::Impl::drawControl(WINDOW *win) {
+	void CursesRenderer::Impl::drawControls(WINDOW *win) {
 		wattron(win, COLOR_PAIR(1));
 		wattron(win, A_BOLD);
 		mvwprintw(win, 0, 0, "Q - Quit    N - New grid    <Space> - Pause / Resume the game");
 		wrefresh(win);
 		wattroff(win, A_BOLD);
 		wattroff(win, COLOR_PAIR(1));
+	}
+
+	void CursesRenderer::Impl::drawInfos(WINDOW *win, const Generation &gen) {
+		std::string str = "Generation ";
+		str += std::to_string(gen);
+		mvwprintw(win, 0, 0, str.c_str());
+		wrefresh(win);
 	}
 
 	void CursesRenderer::Impl::drawPlay(WINDOW *win, const Grid &grid) {
@@ -140,11 +152,12 @@ namespace gameoflife {
 	char CursesRenderer::waitinput() {
 		return pimpl->waitinput();
 	}
-	void CursesRenderer::draw(const Grid &grid) {
-		pimpl->draw(grid);
+	void CursesRenderer::draw(const Grid &grid, const Generation &gen) {
+		pimpl->draw(grid, gen);
 	}
 	Size CursesRenderer::availablespace() {
 		return pimpl->availablespace();
-	} //CursesRenderer definition
+	}
+	//CursesRenderer definition
 
 } //!namespace

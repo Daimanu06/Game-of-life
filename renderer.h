@@ -2,6 +2,7 @@
 #define VIEW_H
 
 #include "size.h"
+#include "generation.h"
 
 namespace gameoflife {
 
@@ -15,7 +16,7 @@ namespace gameoflife {
 			/**
 			 * Draw the world winthin the given grid. Must be overriden in subclasses.
 			 */
-			virtual void draw(const Grid&) = 0;
+			virtual void draw(const Grid&, const Generation&) = 0;
 			/**
 			 * Wait for the user input and return it as a character.
 			 */

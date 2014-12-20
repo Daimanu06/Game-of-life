@@ -87,6 +87,6 @@ namespace gameoflife {
 	}
 
 	void GameOfLife::draw() {
-		m_view.draw(m_grid);
+		m_view.draw(m_grid, m_current_gen);
 	}
 }

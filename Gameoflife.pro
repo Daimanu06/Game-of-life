@@ -21,4 +21,5 @@ HEADERS += \
     size.h \
     renderer.h \
     terminalrenderer.h \
-    cursesrenderer.h
+    cursesrenderer.h \
+    generation.h

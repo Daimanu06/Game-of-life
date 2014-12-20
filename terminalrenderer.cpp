@@ -8,7 +8,7 @@
 
 namespace gameoflife {
 
-	void TerminalRenderer::draw(const Grid &grid) {
+	void TerminalRenderer::draw(const Grid &grid, const Generation&) {
 		for(Size::size_t row = 0; row < grid.height(); row++) {
 			for(Size::size_t col = 0; col < grid.width(); col++) {
 				std::cout << (grid(row, col).isAlive() ? 'X' : ' ');
