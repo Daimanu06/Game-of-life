@@ -1,0 +1,9 @@
+v0.1 (2014-12-17)
++ game rules.
++ basic renderer on terminal.
++ basic renderer with ncurses.
+
+v0.2 (2014-12-20)
++ set a maximum amount of generation.
++ pause / resume the game.
++ colors in the ncurses render.

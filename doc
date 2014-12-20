@@ -1,0 +1,19 @@
+┌───┬───┬───┬───┬───┐
+│   │   │   │   │   │
+├───╆━━━╈━━━╈━━━╅───┤
+│   ┃   ┃   ┃   ┃   │
+├───╊━━━╋━━━╋━━━╉───┤
+│   ┃   ┃   ┃   ┃   │
+├───╊━━━╋━━━╋━━━╉───┤
+│   ┃   ┃   ┃   ┃   │
+├───╄━━━╇━━━╇━━━╃───┤
+│   │   │   │   │   │
+└───┴───┴───┴───┴───┘
+←──── real size ────→
+    ←── size ──→
+
+Normal: realsize
+Bold: size
+
+The "real" size is the size use internally in the software. It will never be displayed entirely.
+The "normal" size is the size provided to the user. It excludes the hidden border made of one Cell width.
