@@ -1,10 +1,9 @@
 #ifndef _GAMEOGLIFE_
 #define _GAMEOFLIFE_
 
-#include "size.h"
-#include "grid.h"
 #include "generation.h"
 #include <limits>
+#include <memory>
 
 namespace gameoflife {
 
@@ -12,16 +11,9 @@ namespace gameoflife {
 
 	/**
 	 * Controller class.
-	 * Manages the data (the grid), the view and the game rules.
+	 * Manages the world, the view and the game rules.
 	 */
 	class GameOfLife{
-		private:
-			Renderer &m_view;
-			Grid  m_grid;
-			bool m_run = false;
-			bool m_paused = false;
-			Generation m_current_gen = 0;
-
 		public:
 			/**
 			 * Construct an empty grid (only populated with dead cells).
@@ -51,15 +43,8 @@ namespace gameoflife {
 			void resume();
 
 		private:
-			void update();
-			/**
-			 * Transit to the next generation and set is as the current generation.
-			 */
-			void nextgeneration();
-			/**
-			 * Draw the grid in the the view provided.
-			 */
-			void draw();
+			class Impl;
+			std::unique_ptr<Impl> pimpl;
 	};
 
 }

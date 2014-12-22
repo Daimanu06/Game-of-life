@@ -1,19 +1,49 @@
 #include "gameoflife.h"
 #include "cell.h"
 #include "renderer.h"
+#include "size.h"
+#include "grid.h"
 #include <thread>
 #include <random>
 
 namespace gameoflife {
 
-	GameOfLife::GameOfLife(Renderer &view) :
-			m_view(view),
-			m_grid(view.availablespace())
+	struct GameOfLife::Impl {
+			Renderer &m_view;
+			Grid  m_grid;
+			bool m_run = false;
+			bool m_paused = false;
+			Generation m_current_gen = 0;
+
+			Impl(Renderer &);
+			~Impl();
+
+			void newgrid(std::uint8_t life_proba = 50);
+			void run(const Generation max = std::numeric_limits<Generation>::max());
+			void pause();
+			void resume();
+
+			void update();
+			/**
+			 * Transit to the next generation and set is as the current generation.
+			 */
+			void nextgeneration();
+			/**
+			 * Draw the grid in the the view provided.
+			 */
+			void draw();
+
+	}; //GameOfLife::Impl declaration end
+
+	//GameOfLife::Impl definition
+	GameOfLife::Impl::Impl(Renderer &view) :
+		m_view(view),
+		m_grid(view.availablespace())
 	{}
 
-	GameOfLife::~GameOfLife() {}
+	GameOfLife::Impl::~Impl() {}
 
-	void GameOfLife::newgrid(std::uint8_t life_proba) {
+	void GameOfLife::Impl::newgrid(std::uint8_t life_proba) {
 		m_run = false;
 		m_current_gen = 0;
 		if(life_proba > 100) {
@@ -38,7 +68,7 @@ namespace gameoflife {
 	 * #1 updates and draws continuously the grid.
 	 * #2 awaits for user's input.
 	 */
-	void GameOfLife::run(const Generation max) {
+	void GameOfLife::Impl::run(const Generation max) {
 		m_run = true;
 		std::thread t1([&]() {
 			while(m_run && m_current_gen < max) {
@@ -60,19 +90,19 @@ namespace gameoflife {
 		t2.join();
 	}
 
-	void GameOfLife::pause() {
+	void GameOfLife::Impl::pause() {
 		m_paused = true;
 	}
 
-	void GameOfLife::resume() {
+	void GameOfLife::Impl::resume() {
 		m_paused = false;
 	}
 
-	void GameOfLife::update() {
+	void GameOfLife::Impl::update() {
 		nextgeneration();
 	}
 
-	void GameOfLife::nextgeneration() {
+	void GameOfLife::Impl::Impl::nextgeneration() {
 		Grid newgrid = m_grid;
 		for(Size::size_t row = 0; row < newgrid.height(); row++) {
 			for(Size::size_t col = 0; col < newgrid.width(); col++) {
@@ -86,7 +116,33 @@ namespace gameoflife {
 		m_current_gen++;
 	}
 
-	void GameOfLife::draw() {
+	void GameOfLife::Impl::draw() {
 		m_view.draw(m_grid, m_current_gen);
 	}
+
+	//GameOfLife::Impl definition end
+
+	//GameOfLife definition
+	GameOfLife::GameOfLife(Renderer &view) :
+		pimpl(new Impl(view))
+	{}
+
+	GameOfLife::~GameOfLife() {}
+
+	void GameOfLife::newgrid(std::uint8_t life_proba) {
+		pimpl->newgrid(life_proba);
+	}
+
+	void GameOfLife::run(const Generation max) {
+		pimpl->run(max);
+	}
+
+	void GameOfLife::pause() {
+		pimpl->pause();
+	}
+
+	void GameOfLife::resume() {
+		pimpl->resume();
+	}
+
 }
