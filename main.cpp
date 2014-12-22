@@ -9,7 +9,7 @@ int main(int, char **) {
 		//gol::TerminalRenderer view;
 		gol::CursesRenderer view;
 		gol::GameOfLife game(view);
-		game.newgrid();
+		game.newworld();
 		game.run();
 	} catch (const std::out_of_range& e) {
 		std::cerr << "Error: " << e.what() << '\n';

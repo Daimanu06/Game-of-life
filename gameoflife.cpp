@@ -18,7 +18,7 @@ namespace gameoflife {
 			Impl(Renderer &);
 			~Impl();
 
-			void newgrid(std::uint8_t life_proba = 50);
+			void newworld(std::uint8_t life_proba = 50);
 			void run(const Generation max = std::numeric_limits<Generation>::max());
 			void pause();
 			void resume();
@@ -43,7 +43,7 @@ namespace gameoflife {
 
 	GameOfLife::Impl::~Impl() {}
 
-	void GameOfLife::Impl::newgrid(std::uint8_t life_proba) {
+	void GameOfLife::Impl::newworld(std::uint8_t life_proba) {
 		m_run = false;
 		m_current_gen = 0;
 		if(life_proba > 100) {
@@ -129,8 +129,8 @@ namespace gameoflife {
 
 	GameOfLife::~GameOfLife() {}
 
-	void GameOfLife::newgrid(std::uint8_t life_proba) {
-		pimpl->newgrid(life_proba);
+	void GameOfLife::newworld(std::uint8_t life_proba) {
+		pimpl->newworld(life_proba);
 	}
 
 	void GameOfLife::run(const Generation max) {

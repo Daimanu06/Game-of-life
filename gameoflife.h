@@ -23,11 +23,11 @@ namespace gameoflife {
 
 		public:
 			/**
-			 * Create a new grid, with random probability for each cell to live.
+			 * Create a new world, with random probability for each cell to live.
 			 * If the probability is greater than 100, it will be rounded to 100.
 			 * @param life_proba probability of a cell to live in percent (0 → no cells are alive, 100 → all cells are alive).
 			 */
-			void newgrid(std::uint8_t life_proba = 50);
+			void newworld(std::uint8_t life_proba = 50);
 			/**
 			 * Update and render the game "max" times.
 			 * By default the game will run until it reaches the 2³²th (≈ 4⋅10⁹) generation.
