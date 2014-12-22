@@ -30,7 +30,7 @@ namespace gameoflife {
 			const Cell& operator() (const Size::size_t row, const Size::size_t col) const;
 				  Cell& operator() (const Size::size_t row, const Size::size_t col);
 			
-	}; //!Grid::Impl declaration
+	}; //Grid::Impl declaration end
 
 	//Grid::Impl definition
 	Grid::Impl::Impl(const Size& size) :
@@ -64,7 +64,7 @@ namespace gameoflife {
 		if(col > m_realsize.width ) throw std::out_of_range("Column out of range.");
 		return m_cells[(m_realsize.width * row) + col];
 	}
-	//!Grid::Impl definition
+	//Grid::Impl definition end
 
 	//Grid definition
 	Grid::Grid(const Size& size) :
@@ -113,6 +113,6 @@ namespace gameoflife {
 		alive += (*pimpl)(row+2, col+2).isAlive(); //bottom-right
 		return alive;
 	}
-	//!Grid definition
+	//Grid definition end
 
-} //!namespace
+} //namespace end

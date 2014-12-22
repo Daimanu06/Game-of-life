@@ -32,7 +32,7 @@ namespace gameoflife {
 			void drawPlay(WINDOW *, const Grid&);
 			void drawControls(WINDOW *);
 			void drawInfos(WINDOW *, const Generation&);
-	}; //CursesRenderer::Impl declaration
+	}; //CursesRenderer::Impl declaration end
 
 	//CursesRenderer::Impl definition
 	CursesRenderer::Impl::Impl() {
@@ -143,7 +143,7 @@ namespace gameoflife {
 		wattroff(win, A_BOLD);
 		wattroff(win, COLOR_PAIR(2));
 	}
-	//CursesRenderer::Impl definition
+	//CursesRenderer::Impl definition end
 
 	//CursesRenderer definition
 	CursesRenderer::CursesRenderer() : Renderer(), pimpl(new Impl) {}
@@ -158,6 +158,6 @@ namespace gameoflife {
 	Size CursesRenderer::availablespace() {
 		return pimpl->availablespace();
 	}
-	//CursesRenderer definition
+	//CursesRenderer definition end
 
 } //!namespace
