@@ -1,4 +1,4 @@
-#ifndef _GAMEOGLIFE_
+#ifndef _GAMEOFLIFE_
 #define _GAMEOFLIFE_
 
 #include "generation.h"
@@ -7,7 +7,7 @@
 
 namespace gameoflife {
 
-	class Renderer;
+	struct Renderer;
 
 	/**
 	 * Controller class.
@@ -43,7 +43,7 @@ namespace gameoflife {
 			void resume();
 
 		private:
-			class Impl;
+			struct Impl;
 			std::unique_ptr<Impl> pimpl;
 	};
 
