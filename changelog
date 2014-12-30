@@ -7,3 +7,6 @@ v0.2 (2014-12-20)
 + set a maximum amount of generation.
 + pause / resume the game.
 + colors in the ncurses render.
+
+v0.3 (2014-12-19)
++ command-line arguments (help, version and renderer)

@@ -1,4 +1,5 @@
 TEMPLATE = app
+TARGET = gameoflife
 CONFIG += console
 CONFIG += C++11
 CONFIG -= app_bundle
@@ -12,7 +13,8 @@ SOURCES += \
     grid.cpp \
     cell.cpp \
     terminalrenderer.cpp \
-    cursesrenderer.cpp
+    cursesrenderer.cpp \
+    controls.cpp
 
 HEADERS += \
     gameoflife.h \
@@ -22,4 +24,11 @@ HEADERS += \
     renderer.h \
     terminalrenderer.h \
     cursesrenderer.h \
-    generation.h
+    generation.h \
+    controls.h \
+    actions.h \
+    main.h
+
+install_var.path = $$OUT_PWD
+install_var.files += $$PWD/settings.ini
+INSTALLS += install_var

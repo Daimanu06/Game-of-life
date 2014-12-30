@@ -13,6 +13,7 @@ namespace gameoflife {
 	 * A renderer must be able to draw the grid, get user input and provide it's available space.
 	 */
 	struct Renderer {
+			virtual ~Renderer() = default;
 			/**
 			 * Draw the world winthin the given grid. Must be overriden in subclasses.
 			 */
