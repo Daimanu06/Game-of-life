@@ -11,9 +11,9 @@ namespace gameoflife {
 	 */
 	struct Grid::Impl {
 			///Size of the grid excluding extra cells. This is the size provided to the user.
-			Size m_size;
+			const Size m_size;
 			///Real size of the grid including extra cells.
-			Size m_realsize;
+			const Size m_realsize;
 			///All the Cells including the neutral ones of the border.
 			std::vector<Cell> m_cells;
 
@@ -35,7 +35,7 @@ namespace gameoflife {
 	//Grid::Impl definition
 	Grid::Impl::Impl(const Size& size) :
 		m_size     (size),
-		m_realsize (Size{size.width+2u, size.height+2u}),
+		m_realsize {static_cast<Size::size_t>(size.width+2), static_cast<Size::size_t>(size.height+2)},
 		m_cells    (m_realsize.width * m_realsize.height)
 	{}
 	Grid::Impl::Impl(const Grid& other) :

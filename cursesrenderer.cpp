@@ -48,7 +48,7 @@ namespace gameoflife {
 		Size::size_t scrw, scrh;
 		getmaxyx(stdscr, scrh, scrw);
 		//TODO: warning with getmaxyx
-		screen_size = Size{scrw, scrh-2};
+		screen_size = Size{scrw, static_cast<Size::size_t>(scrh-2)};
 
 		start_color();
 		init_pair(1, COLOR_BLUE, COLOR_BLACK);
@@ -160,4 +160,4 @@ namespace gameoflife {
 	}
 	//CursesRenderer definition end
 
-} //!namespace
+} //namespace end

@@ -26,7 +26,7 @@ namespace gameoflife {
 			virtual Size availablespace() override;
 
 		private:
-			class Impl;
+			struct Impl;
 			std::unique_ptr<Impl> pimpl;
 
 	};

@@ -49,7 +49,7 @@ namespace gameoflife {
 			std::uint8_t cells_alive_around(Size::size_t row, Size::size_t col) const;
 
 		private:
-			class Impl;
+			struct Impl;
 			std::unique_ptr<Impl> pimpl;
 	};
 
